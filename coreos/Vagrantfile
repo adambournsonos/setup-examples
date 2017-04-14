@@ -9,7 +9,7 @@ Vagrant.require_version '>= 1.6.0'
 
 CLOUD_CONFIG_PATH = File.join(File.dirname(__FILE__), 'user-data')
 
-update_channel = 'alpha'
+update_channel = 'stable'
 image_version = 'current'
 vm_memory = 512
 vm_cpus = 1
