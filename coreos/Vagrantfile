@@ -99,6 +99,7 @@ Vagrant.configure('2') do |config|
 
       if node[:metadata] == 'role=nginx'
         config.vm.network "forwarded_port", guest: 80, host: 8000
+        config.vm.network "forwarded_port", guest: 3000, host: 3000
         nginx_conf_file = File.join(File.dirname(__FILE__), 'nginx.conf')
         config.vm.provision :file, source: nginx_conf_file, destination: '/tmp/nginx.conf'
         config.vm.provision :shell, inline: 'mkdir -p /srv/nginx', privileged: true
