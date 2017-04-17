@@ -11,7 +11,7 @@ CLOUD_CONFIG_PATH = File.join(File.dirname(__FILE__), 'user-data')
 
 update_channel = 'stable'
 image_version = 'current'
-vm_memory = 512
+vm_memory = 1024
 vm_cpus = 1
 
 cluster = [
@@ -98,7 +98,7 @@ Vagrant.configure('2') do |config|
       config.vm.provision :shell, inline: 'mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/', privileged: true
 
       if node[:metadata] == 'role=nginx'
-        config.vm.network "forwarded_port", guest: 80, host: 80
+        config.vm.network "forwarded_port", guest: 80, host: 80, priviledged: true
         nginx_conf_file = File.join(File.dirname(__FILE__), 'nginx.conf')
         config.vm.provision :file, source: nginx_conf_file, destination: '/tmp/nginx.conf'
         config.vm.provision :shell, inline: 'mkdir -p /srv/nginx', privileged: true
