@@ -1,0 +1,20 @@
+[Unit]
+Description=RethinkDB for STF
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=on-failure
+ExecStartPre=/usr/bin/docker pull rethinkdb:latest
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStart=/usr/bin/docker run \
+  --name %p \
+  -v /home/stf-admin/rethink-data:/data \
+  -p 8080:8080 \
+  -p 28015:28015
+ExecStop=-/usr/bin/docker stop -t 10 %p
+
+[Install]
+WantedBy=multi-user.target

@@ -21,3 +21,6 @@ ExecStop=/usr/bin/docker stop -t 2 %p
 
 [X-Fleet]
 MachineMetadata="role=nginx"
+
+[Install]
+WantedBy=multi-user.target
