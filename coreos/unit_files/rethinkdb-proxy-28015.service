@@ -1,7 +1,7 @@
 [Unit]
 Description=RethinkDB proxy/28015
-After=docker.service
-Requires=docker.service
+After=rethinkdb.service
+Requires=rethinkdb.service
 
 [Service]
 EnvironmentFile=/etc/environment
@@ -19,3 +19,6 @@ ExecStop=-/usr/bin/docker stop -t 10 %p
 
 [X-Fleet]
 Global=true
+
+[Install]
+WantedBy=multi-user.target

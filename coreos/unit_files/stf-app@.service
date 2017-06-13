@@ -13,12 +13,13 @@ ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStart=/usr/bin/docker run --rm \
   --name %p-%i \
   --link rethinkdb-proxy-28015:rethinkdb \
+  -v /opt/openstf-db:/app/node_modules/stf-device-db/dist \
   -e "SECRET=answeri$42" \
   -p %i:3000 \
   openstf/stf:latest \
   stf app --port 3000 \
     --auth-url http://stf-sea.sonos.com/auth/mock/ \
-    --websocket-url http://10.231.1.244/
+    --websocket-url ws://stf-sea.sonos.com/
 ExecStop=-/usr/bin/docker stop -t 10 %p-%i
 
 [Install]

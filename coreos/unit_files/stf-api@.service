@@ -14,12 +14,13 @@ ExecStart=/usr/bin/docker run --rm \
   --name %p-%i \
   --link rethinkdb-proxy-28015:rethinkdb \
   -e "SECRET=answeri$42" \
+  -v /opt/openstf-db:/app/node_modules/stf-device-db/dist \
   -p %i:3000 \
   openstf/stf:latest \
   stf api --port 3000 \
-  --connect-sub tcp://10.231.1.244:7150 \
-  --connect-push tcp://10.231.1.244:7170
-  ExecStop=-/usr/bin/docker stop -t 10 %p-%i
+  --connect-sub tcp://stf-sea.sonos.com:7150 \
+  --connect-push tcp://stf-sea.sonos.com:7170
+ExecStop=-/usr/bin/docker stop -t 10 %p-%i
 
 [Install]
 WantedBy=multi-user.target

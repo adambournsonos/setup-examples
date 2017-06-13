@@ -18,8 +18,8 @@ ExecStart=/usr/bin/docker run --rm \
   openstf/stf:latest \
   stf websocket --port 3000 \
     --storage-url http://stf-sea.sonos.com/ \
-    --connect-sub tcp://10.231.1.244:7150 \
-    --connect-push tcp://10.231.1.244:7170
+    --connect-sub tcp://stf-sea.sonos.com:7150 \
+    --connect-push tcp://stf-sea.sonos.com:7170
 ExecStop=/usr/bin/docker stop -t 10 %p-%i
 
 [Install]

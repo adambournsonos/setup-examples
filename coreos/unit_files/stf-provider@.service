@@ -13,11 +13,13 @@ ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStart=/usr/bin/docker run --rm \
   --name %p-%i \
   --net host \
+  --memory=4g \
+  -v /opt/openstf-db:/app/node_modules/stf-device-db/dist \
   openstf/stf:latest \
   stf provider \
     --name "%H/%i" \
-    --connect-sub tcp://10.231.1.244:7250 \
-    --connect-push tcp://10.231.1.244:7270 \
+    --connect-sub tcp://stf-sea.sonos.com:7250 \
+    --connect-push tcp://stf-sea.sonos.com:7270 \
     --storage-url http://stf-sea.sonos.com/ \
     --public-ip ${COREOS_PRIVATE_IPV4} \
     --min-port=15000 \
