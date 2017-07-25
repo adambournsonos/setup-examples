@@ -13,6 +13,7 @@ ExecStartPre=-/usr/bin/docker rm %p
 ExecStart=/usr/bin/docker run --rm \
   --name %p \
   --net host \
+  --memory=4g \
   openstf/stf:latest \
   stf triproxy dev \
     --bind-pub "tcp://*:7250" \

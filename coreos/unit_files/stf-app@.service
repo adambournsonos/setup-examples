@@ -12,6 +12,7 @@ ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStart=/usr/bin/docker run --rm \
   --name %p-%i \
+  --memory=4g \
   --link rethinkdb-proxy-28015:rethinkdb \
   -v /opt/openstf-db:/app/node_modules/stf-device-db/dist \
   -e "SECRET=answeri$42" \

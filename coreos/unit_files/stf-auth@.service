@@ -12,6 +12,7 @@ ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStart=/usr/bin/docker run --rm \
   --name %p-%i \
+  --memory=4g \
   -e "SECRET=answeri$42" \
   -p %i:3000 \
   openstf/stf:latest \

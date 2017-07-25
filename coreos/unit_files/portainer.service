@@ -8,6 +8,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop ui-for-docker
 ExecStartPre=-/usr/bin/docker rm -v ui-for-docker
 ExecStart=/usr/bin/docker run --name ui-for-docker \
+  --memory=4g \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /home/stf-admin/portainer-data:/data \
   -p 9000:9000 portainer/portainer --no-auth

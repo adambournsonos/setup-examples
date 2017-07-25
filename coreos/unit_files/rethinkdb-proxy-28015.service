@@ -12,6 +12,7 @@ ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
 ExecStart=/usr/bin/docker run --rm \
   --name %p \
+  --memory=4g \
   -p 28015 \
   -e RETHINKDB_PORT_28015_TCP=tcp://10.231.1.244:28015 \
   openstf/ambassador:latest

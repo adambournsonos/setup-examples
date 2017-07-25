@@ -11,6 +11,7 @@ ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
 ExecStart=/usr/bin/docker run --rm \
   --name %p \
+  --memory=4g \
   --privileged \
   -v /dev/bus/usb:/dev/bus/usb \
   --net host \
