@@ -6,8 +6,9 @@ ConditionPathExists=/srv/nginx/nginx.conf
 
 [Service]
 EnvironmentFile=/etc/environment
-TimeoutStartSec=0
+TimeoutStartSec=20
 Restart=always
+RestartSec=3
 ExecStartPre=/usr/bin/docker pull nginx:1.7.10
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
@@ -16,7 +17,7 @@ ExecStart=/usr/bin/docker run --rm \
   --net host \
   --memory=4g \
   -v /srv/nginx/nginx.conf:/etc/nginx/nginx.conf:ro \
-  nginx:1.7.10 \
+  nginx:latest \
   nginx
 ExecStop=/usr/bin/docker stop -t 2 %p
 

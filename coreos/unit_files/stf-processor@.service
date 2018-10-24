@@ -1,12 +1,14 @@
 [Unit]
 Description=STF processor
-After=rethinkdb-proxy-28015.service
-BindsTo=rethinkdb-proxy-28015.service
+# After=rethinkdb-proxy-28015.service
+# BindsTo=rethinkdb-proxy-28015.service
 
 [Service]
 EnvironmentFile=/etc/environment
-TimeoutStartSec=0
+TimeoutStartSec=60
 Restart=always
+RestartSec=3
+ExecStartPre=/bin/systemctl is-active rethinkdb-proxy-28015.service
 ExecStartPre=/usr/bin/docker pull openstf/stf:latest
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i

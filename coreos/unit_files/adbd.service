@@ -4,8 +4,9 @@ After=docker.service
 Requires=docker.service
 
 [Service]
-TimeoutStartSec=0
+TimeoutStartSec=infinity
 Restart=always
+RestartSec=3
 ExecStartPre=/usr/bin/docker pull sorccu/adb:latest
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p

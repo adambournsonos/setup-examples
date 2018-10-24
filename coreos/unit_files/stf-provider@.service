@@ -1,12 +1,14 @@
 [Unit]
 Description=STF provider
-After=adbd.service
-BindsTo=adbd.service
+# After=adbd.service
+# BindsTo=adbd.service
 
 [Service]
 EnvironmentFile=/etc/environment
-TimeoutStartSec=0
+TimeoutStartSec=60
 Restart=always
+RestartSec=3
+ExecStartPre=/bin/systemctl is-active adbd.service
 ExecStartPre=/usr/bin/docker pull openstf/stf:latest
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i

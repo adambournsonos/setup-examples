@@ -1,12 +1,14 @@
 [Unit]
 Description=RethinkDB proxy/28015
-After=rethinkdb.service
-Requires=rethinkdb.service
+# After=rethinkdb.service
+# Requires=rethinkdb.service
 
 [Service]
 EnvironmentFile=/etc/environment
-TimeoutStartSec=0
+TimeoutStartSec=60
 Restart=always
+RestartSec=3
+ExecStartPre=/bin/systemctl is-active rethinkdb.service
 ExecStartPre=/usr/bin/docker pull openstf/ambassador:latest
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
